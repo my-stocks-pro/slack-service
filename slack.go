@@ -3,7 +3,7 @@ package main
 import "github.com/nlopes/slack"
 
 const (
-	SlackToken      = "xoxb-324237408453-0yYuvLezDwcn8OclXo7jsjKq"
+	SlackToken      = ""
 	RejectedChannel = "shutterstock_rejected"
 	ApprovedChannel = "shutterstock_approved"
 	EarningsChannel = "shutterstock"
