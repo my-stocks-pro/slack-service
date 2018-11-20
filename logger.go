@@ -8,12 +8,12 @@ import (
 
 const (
 	logPath   = "app_log"
-	logFile   = "logs"
 	logPrefix = "slack-service"
 )
 
 type Logger interface {
 	Error(err error)
+	Info(msg string)
 }
 
 type TypeLogger struct {
@@ -21,7 +21,7 @@ type TypeLogger struct {
 }
 
 func NewLogger() (TypeLogger, error) {
-	filename := fmt.Sprintf("%s/%s_%s.log", logPath, logPrefix, logFile)
+	filename := fmt.Sprintf("%s/%s.log", logPath, logPrefix)
 	_, err := os.Create(filename)
 	if err != nil {
 		return TypeLogger{}, err
