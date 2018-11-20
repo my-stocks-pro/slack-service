@@ -40,7 +40,7 @@ func (r TypeRouter) SlackHandler(w http.ResponseWriter, req *http.Request) {
 			http.Error(w, "Read body error", http.StatusBadRequest)
 		}
 
-		if err := r.Slack.Send(body,  dataType); err != nil {
+		if err := r.Slack.Send(body, dataType); err != nil {
 			r.Logger.Error(err)
 			http.Error(w, "Slack service error", http.StatusServiceUnavailable)
 		}

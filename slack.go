@@ -35,7 +35,7 @@ func NewSlack() TypeSlack {
 			"rejected": "shutterstock_rejected",
 			"approved": "shutterstock_approved",
 			"earnings": "shutterstock"},
-		Client:       slack.New(SlackToken),
+		Client: slack.New(SlackToken),
 	}
 }
 
