@@ -8,7 +8,7 @@ func main() {
 
 	service := NewService(logger)
 
-	if err := service.Server.Server.ListenAndServe(); err != nil {
+	if err := service.Server.Serve(); err != nil {
 		service.Logger.Error(err)
 	}
 }
