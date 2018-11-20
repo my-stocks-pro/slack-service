@@ -1,14 +1,13 @@
 package main
 
-
-
 func main() {
 
-	logger := NewLogger()
+	service := NewService(NewLogger(), NewSlack(), NewRouter())
 
-	service := NewService(logger)
+	server := NewServer().New(service.Router)
 
-	if err := service.Server.Serve(); err != nil {
+	if err := server.Serve(); err != nil {
 		service.Logger.Error(err)
 	}
+
 }

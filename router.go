@@ -6,7 +6,7 @@ import (
 )
 
 type Router interface {
-	InitMux() TypeRouter
+	New(Logger TypeLogger) TypeRouter
 }
 
 type TypeRouter struct {
@@ -14,16 +14,15 @@ type TypeRouter struct {
 	Router *mux.Router
 }
 
-func NewRouter(logger TypeLogger) TypeRouter {
-	return TypeRouter{
-		Logger: logger,
-		Router: mux.NewRouter().StrictSlash(true)}
+func NewRouter() TypeRouter {
+	return TypeRouter{}
 }
 
-func (r TypeRouter) InitMux() TypeRouter {
-	r.Router.HandleFunc("/health", r.HandlerHealth).Methods(http.MethodGet)
-	r.Router.HandleFunc("/slack", r.Slack).Methods(http.MethodPost)
-	return TypeRouter{Router: r.Router}
+func (r TypeRouter) New(Logger TypeLogger) TypeRouter {
+	router := mux.NewRouter().StrictSlash(true)
+	router.HandleFunc("/health", r.HandlerHealth).Methods(http.MethodGet)
+	router.HandleFunc("/slack", r.Slack).Methods(http.MethodPost)
+	return TypeRouter{Router: router}
 }
 
 func (r TypeRouter) Slack(w http.ResponseWriter, req *http.Request) {

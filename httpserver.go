@@ -5,25 +5,22 @@ import (
 	"time"
 )
 
-type HTTPServer interface {
-	InitServer(router Router) TypeServer
+type Server interface {
+	New(r TypeRouter) TypeServer
 }
 
 type TypeServer struct {
-	Logger TypeLogger
 	HTTP *http.Server
 }
 
-func NewServer(logger TypeLogger) TypeServer {
-	return TypeServer{
-		Logger: logger,
-		HTTP: &http.Server{}}
+func NewServer() TypeServer {
+	return TypeServer{}
 }
 
-func (s TypeServer) InitServer(router Router) TypeServer {
+func (s TypeServer) New(r TypeRouter) TypeServer {
 	return TypeServer{
 		HTTP: &http.Server{
-			Handler:      router.InitMux().Router,
+			Handler:      r.Router,
 			Addr:         ":8002",
 			WriteTimeout: 15 * time.Second,
 			ReadTimeout:  15 * time.Second,
