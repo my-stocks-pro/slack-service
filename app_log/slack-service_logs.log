@@ -1,15 +1,1 @@
-2018-11-19T23:49:30.502+0200	ERROR	slack-service/logger.go:50	HealthCheckType
-main.TypeLogger.Error
-	/Users/oryzhy/go/src/github.com/my-stocks-pro/slack-service/logger.go:50
-main.TypeRouter.HandlerHealth
-	/Users/oryzhy/go/src/github.com/my-stocks-pro/slack-service/health.go:23
-main.(TypeRouter).HandlerHealth-fm
-	/Users/oryzhy/go/src/github.com/my-stocks-pro/slack-service/router.go:24
-net/http.HandlerFunc.ServeHTTP
-	/usr/local/go/src/net/http/server.go:1947
-github.com/my-stocks-pro/vendor/github.com/gorilla/mux.(*Router).ServeHTTP
-	/Users/oryzhy/go/src/github.com/my-stocks-pro/vendor/github.com/gorilla/mux/mux.go:162
-net/http.serverHandler.ServeHTTP
-	/usr/local/go/src/net/http/server.go:2694
-net/http.(*conn).serve
-	/usr/local/go/src/net/http/server.go:1830
+2018-11-20T23:00:44.244+0200	INFO	slack-service/logger.go:50	Start slack-service on port :8002

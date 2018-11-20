@@ -1,13 +1,23 @@
 package main
 
+import "fmt"
+
+const ServiceName = "slack-service"
+
 func main() {
 
-	service := NewService(NewLogger(), NewSlack(), NewRouter())
-
-	server := NewServer().New(service.Router)
-
-	if err := server.Serve(); err != nil {
-		service.Logger.Error(err)
+	logger, err := NewLogger()
+	if err != nil {
+		fmt.Println(err.Error())
 	}
 
+	slack := NewSlack()
+
+	router := NewRouter(logger, slack)
+
+	server := NewServer(router)
+
+	logger.Info(fmt.Sprintf("Start %s on port %s", ServiceName, server.HTTP.Addr))
+
+	logger.Error(server.Serve())
 }

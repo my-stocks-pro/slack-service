@@ -20,8 +20,6 @@ func (r TypeRouter) HandlerHealth(w http.ResponseWriter, req *http.Request) {
 		Version:  "1.0",
 	}
 
-	r.Logger.Error(errors.New("HealthCheckType"))
-
 	payload, err := json.Marshal(data)
 	if err != nil {
 		r.Logger.Error(errors.New("HandlerHealth Marshal"))

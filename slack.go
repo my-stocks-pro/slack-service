@@ -10,7 +10,6 @@ const (
 )
 
 type Slack interface {
-	New(Logger TypeLogger) TypeSlack
 	Send(msg SlackMessage, slackChannel string) error
 	ErrorMessage() error
 }
@@ -26,12 +25,7 @@ type SlackMessage struct {
 }
 
 func NewSlack() TypeSlack {
-	return TypeSlack{}
-}
-
-func (s TypeSlack) New(logger TypeLogger) TypeSlack {
 	return TypeSlack{
-		Logger: logger,
 		Client: slack.New(SlackToken),
 	}
 }

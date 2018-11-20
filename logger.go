@@ -13,18 +13,14 @@ const (
 )
 
 type Logger interface {
-	InitLogger() (TypeLogger, error)
+	Error(err error)
 }
 
 type TypeLogger struct {
 	Client *zap.Logger
 }
 
-func NewLogger() TypeLogger {
-	return TypeLogger{}
-}
-
-func (l TypeLogger) InitLogger() (TypeLogger, error) {
+func NewLogger() (TypeLogger, error) {
 	filename := fmt.Sprintf("%s/%s_%s.log", logPath, logPrefix, logFile)
 	_, err := os.Create(filename)
 	if err != nil {
@@ -48,4 +44,8 @@ func (l TypeLogger) InitLogger() (TypeLogger, error) {
 
 func (l TypeLogger) Error(err error) {
 	l.Client.Error(err.Error())
+}
+
+func (l TypeLogger) Info(msg string) {
+	l.Client.Info(msg)
 }

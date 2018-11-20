@@ -6,25 +6,28 @@ import (
 )
 
 type Router interface {
-	New(Logger TypeLogger) TypeRouter
+	InitMux() *mux.Router
 }
 
 type TypeRouter struct {
-	Logger TypeLogger
-	Router *mux.Router
+	Logger Logger
+	Slack  Slack
 }
 
-func NewRouter() TypeRouter {
-	return TypeRouter{}
+func NewRouter(logger Logger, slack Slack) TypeRouter {
+	return TypeRouter{
+		Logger: logger,
+		Slack:  slack,
+	}
 }
 
-func (r TypeRouter) New(Logger TypeLogger) TypeRouter {
+func (r TypeRouter) InitMux() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/health", r.HandlerHealth).Methods(http.MethodGet)
-	router.HandleFunc("/slack", r.Slack).Methods(http.MethodPost)
-	return TypeRouter{Router: router}
+	router.HandleFunc("/slack", r.SlackHandler).Methods(http.MethodPost)
+	return router
 }
 
-func (r TypeRouter) Slack(w http.ResponseWriter, req *http.Request) {
+func (r TypeRouter) SlackHandler(w http.ResponseWriter, req *http.Request) {
 
 }
